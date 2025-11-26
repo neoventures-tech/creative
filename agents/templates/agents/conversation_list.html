@@ -1,0 +1,104 @@
+{% extends 'agents/base.html' %}
+
+{% block title %}Minhas Conversas - Neo Creative{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="text-white mb-3">
+            <i class="bi bi-chat-dots-fill"></i> Minhas Conversas
+        </h1>
+        <p class="text-white-50">Gerencie suas conversas com o assistente de geração de imagens</p>
+    </div>
+</div>
+
+<div class="row">
+    {% if conversations %}
+        {% for conversation in conversations %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title">
+                            <i class="bi bi-chat-square-text text-primary"></i>
+                            Conversa #{{ conversation.id }}
+                        </h5>
+                        <span class="badge bg-primary">
+                            {{ conversation.messages.count }} mensagens
+                        </span>
+                    </div>
+
+                    <p class="card-text text-muted small">
+                        {{ conversation.system_prompt|truncatewords:20 }}
+                    </p>
+
+                    <div class="d-flex justify-content-between text-muted small mb-3">
+                        <span>
+                            <i class="bi bi-images"></i>
+                            {{ conversation.generated_images.count }} imagens
+                        </span>
+                        <span>
+                            <i class="bi bi-clock"></i>
+                            {{ conversation.updated_at|date:"d/m/Y H:i" }}
+                        </span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'agents:conversation_detail' conversation.pk %}"
+                           class="btn btn-primary">
+                            <i class="bi bi-arrow-right-circle"></i> Abrir Conversa
+                        </a>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{% url 'agents:conversation_update' conversation.pk %}"
+                               class="btn btn-outline-secondary">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <a href="{% url 'agents:conversation_delete' conversation.pk %}"
+                               class="btn btn-outline-danger">
+                                <i class="bi bi-trash"></i> Deletar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="card text-center py-5">
+                <div class="card-body">
+                    <i class="bi bi-chat-dots" style="font-size: 4rem; color: #ccc;"></i>
+                    <h3 class="mt-3">Nenhuma conversa ainda</h3>
+                    <p class="text-muted">Crie sua primeira conversa para começar a gerar imagens com IA!</p>
+                    <a href="{% url 'agents:conversation_create' %}" class="btn btn-primary btn-lg mt-3">
+                        <i class="bi bi-plus-circle"></i> Criar Primeira Conversa
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Pagination -->
+{% if is_paginated %}
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+            <span class="page-link">{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}

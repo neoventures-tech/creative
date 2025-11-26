@@ -1,0 +1,88 @@
+{% extends 'agents/base.html' %}
+
+{% block title %}Galeria de Imagens - Neo Creative{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="text-white mb-3">
+            <i class="bi bi-images"></i> Galeria de Imagens Geradas
+        </h1>
+        <p class="text-white-50">Todas as imagens criadas pelo DALL·E 3</p>
+    </div>
+</div>
+
+{% if images %}
+<div class="image-grid">
+    {% for image in images %}
+    <div class="image-card card">
+        <img src="{{ image.image_url }}" alt="{{ image.prompt|truncatewords:10 }}">
+        <div class="card-body">
+            <p class="card-text small text-muted mb-2">
+                <strong>Prompt:</strong> {{ image.prompt|truncatewords:15 }}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">
+                    <i class="bi bi-clock"></i>
+                    {{ image.created_at|date:"d/m/Y" }}
+                </small>
+                <div class="btn-group btn-group-sm">
+                    <a href="{{ image.image_url }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                    </a>
+                    <a href="{% url 'agents:conversation_detail' image.conversation.pk %}" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-chat-square-text"></i>
+                    </a>
+                </div>
+            </div>
+
+            {% if image.revised_prompt %}
+            <details class="mt-2">
+                <summary class="small text-muted" style="cursor: pointer;">
+                    <i class="bi bi-info-circle"></i> Prompt revisado
+                </summary>
+                <p class="small text-muted mt-2 mb-0">
+                    {{ image.revised_prompt }}
+                </p>
+            </details>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card text-center py-5">
+    <div class="card-body">
+        <i class="bi bi-images" style="font-size: 4rem; color: #ccc;"></i>
+        <h3 class="mt-3">Nenhuma imagem gerada ainda</h3>
+        <p class="text-muted">Comece uma conversa e peça para o assistente criar imagens!</p>
+        <a href="{% url 'agents:conversation_list' %}" class="btn btn-primary btn-lg mt-3">
+            <i class="bi bi-chat-dots"></i> Ir para Conversas
+        </a>
+    </div>
+</div>
+{% endif %}
+
+<!-- Pagination -->
+{% if is_paginated %}
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+            <span class="page-link">{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}

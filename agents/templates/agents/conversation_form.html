@@ -1,0 +1,63 @@
+{% extends 'agents/base.html' %}
+
+{% block title %}
+{% if form.instance.pk %}Editar Conversa{% else %}Nova Conversa{% endif %} - Neo Creative
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body p-5">
+                <h2 class="card-title mb-4">
+                    {% if form.instance.pk %}
+                    <i class="bi bi-pencil-square text-primary"></i> Editar Conversa
+                    {% else %}
+                    <i class="bi bi-plus-circle text-primary"></i> Nova Conversa
+                    {% endif %}
+                </h2>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label for="{{ form.system_prompt.id_for_label }}" class="form-label fw-bold">
+                            <i class="bi bi-gear-fill"></i> System Prompt (Opcional)
+                        </label>
+                        <textarea class="form-control" id="{{ form.system_prompt.id_for_label }}"
+                                  name="{{ form.system_prompt.name }}" rows="6"
+                                  placeholder="Deixe em branco para usar o prompt padrão ou adicione instruções personalizadas...">{{ form.system_prompt.value|default:'' }}</textarea>
+                        <div class="form-text">
+                            Instruções adicionais para o agente. O system_prompt.md base será sempre carregado automaticamente.
+                        </div>
+                        {% if form.system_prompt.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ form.system_prompt.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <strong>Informação:</strong> O sistema carregará automaticamente:
+                        <ul class="mb-0 mt-2">
+                            <li>System prompt base do arquivo <code>system_prompt.md</code></li>
+                            <li>13 imagens de treinamento de <code>data/train/imagens/</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'agents:conversation_list' %}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i>
+                            {% if form.instance.pk %}Salvar Alterações{% else %}Criar Conversa{% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
