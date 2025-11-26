@@ -193,7 +193,8 @@ IMPORTANTE: Manter PROPORÇÕES e POSICIONAMENTO do template original.
             with open(reference_image_path, "rb") as image_file:
                 print(f"   Enviando arquivo: {reference_image_path}")
                 response = client.images.edit(
-                    model="gpt-image-1",
+                    # model="gpt-image-1",
+                    model="gpt-image-1-mini",
                     image=image_file,
                     prompt=full_prompt,
                     size=size,
