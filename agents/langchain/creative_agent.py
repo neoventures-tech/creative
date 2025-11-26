@@ -44,7 +44,7 @@ def load_system_prompt_from_file() -> str:
 
 def create_creative_agent(
     conversation: Any,
-    model_name: str = "gpt-4o",
+    model_name: str = "gpt-4o-mini",
     temperature: float = 0.7
 ):
     """
@@ -89,7 +89,7 @@ def create_creative_agent(
 def chat_with_agent(
     conversation: Any,
     user_message: str,
-    model_name: str = "gpt-4o",
+    model_name: str = "gpt-4o-mini",
     temperature: float = 0.7
 ) -> Dict[str, Any]:
     """

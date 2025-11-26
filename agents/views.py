@@ -70,7 +70,6 @@ class ConversationCreateView(LoginRequiredMixin, View):
             chat_with_agent(
                 conversation=conversation,
                 user_message="vamos lá",
-                model_name='gpt-4o',
                 temperature=0.7
             )
         except Exception as e:
