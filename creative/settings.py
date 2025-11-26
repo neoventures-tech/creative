@@ -161,7 +161,7 @@ AUTH_USER_MODEL = 'authentication.User'
 # Login/Logout URLs
 LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'auth/login/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Configuração dos ADMINS para receber emails de erro

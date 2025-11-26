@@ -4,20 +4,31 @@ Views para Neo Creative - Sistema de geração de imagens com IA.
 import os
 import json
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.views import View
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 import json
 
 from .models import Conversation, Message, GeneratedImage
 from .langchain.creative_agent import chat_with_agent
 
 
-class ConversationListView(ListView):
+class HomeView(View):
+    """Landing page do Neo Creative."""
+
+    def get(self, request):
+        # Se o usuário estiver autenticado, mostra a home
+        # Senão, também mostra a home (público)
+        return render(request, 'agents/home.html')
+
+
+class ConversationListView(LoginRequiredMixin, ListView):
     """Lista todas as conversas do usuário."""
     model = Conversation
     template_name = 'agents/conversation_list.html'
@@ -26,16 +37,18 @@ class ConversationListView(ListView):
 
     def get_queryset(self):
         """Filtra conversas do usuário autenticado."""
-        if self.request.user.is_authenticated:
-            return Conversation.objects.filter(user=self.request.user).order_by('-updated_at')
-        return Conversation.objects.all().order_by('-updated_at')
+        return Conversation.objects.filter(user=self.request.user).order_by('-updated_at')
 
 
-class ConversationDetailView(DetailView):
+class ConversationDetailView(LoginRequiredMixin, DetailView):
     """Exibe detalhes de uma conversa e permite chat."""
     model = Conversation
     template_name = 'agents/conversation_detail.html'
     context_object_name = 'conversation'
+
+    def get_queryset(self):
+        """Apenas conversas do usuário logado."""
+        return Conversation.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -45,51 +58,40 @@ class ConversationDetailView(DetailView):
         return context
 
 
-class ConversationCreateView(View):
+class ConversationCreateView(LoginRequiredMixin, View):
     """Cria uma nova conversa e redireciona direto para ela."""
 
     def get(self, request):
-        # Cria a conversa diretamente
-        conversation = Conversation.objects.create(
-            user=request.user if request.user.is_authenticated else None
-        )
+        # Cria a conversa para o usuário logado
+        conversation = Conversation.objects.create(user=request.user)
         messages.success(request, 'Conversa criada com sucesso!')
         # Redireciona para a página de detalhes da conversa
         return redirect('agents:conversation_detail', pk=conversation.pk)
 
 
-class ConversationUpdateView(UpdateView):
-    """Atualiza uma conversa existente."""
-    model = Conversation
-    template_name = 'agents/conversation_form.html'
-    fields = []
-
-    def get_success_url(self):
-        return reverse_lazy('agents:conversation_detail', kwargs={'pk': self.object.pk})
-
-    def form_valid(self, form):
-        messages.success(self.request, 'Conversa atualizada com sucesso!')
-        return super().form_valid(form)
-
-
-class ConversationDeleteView(DeleteView):
+class ConversationDeleteView(LoginRequiredMixin, DeleteView):
     """Deleta uma conversa."""
     model = Conversation
     template_name = 'agents/conversation_confirm_delete.html'
     success_url = reverse_lazy('agents:conversation_list')
+
+    def get_queryset(self):
+        """Apenas conversas do usuário logado."""
+        return Conversation.objects.filter(user=self.request.user)
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, 'Conversa deletada com sucesso!')
         return super().delete(request, *args, **kwargs)
 
 
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator([csrf_exempt, login_required], name='dispatch')
 class ChatView(View):
     """View para enviar mensagens ao agente via AJAX."""
 
     def post(self, request, pk):
         try:
-            conversation = get_object_or_404(Conversation, pk=pk)
+            # Buscar apenas conversas do usuário logado
+            conversation = get_object_or_404(Conversation, pk=pk, user=request.user)
 
             # Parse JSON data
             data = json.loads(request.body)
@@ -114,7 +116,7 @@ class ChatView(View):
             return JsonResponse({'error': str(e)}, status=500)
 
 
-class GeneratedImageListView(ListView):
+class GeneratedImageListView(LoginRequiredMixin, ListView):
     """Lista todas as imagens geradas."""
     model = GeneratedImage
     template_name = 'agents/generated_image_list.html'
@@ -123,8 +125,6 @@ class GeneratedImageListView(ListView):
 
     def get_queryset(self):
         """Filtra imagens do usuário autenticado."""
-        if self.request.user.is_authenticated:
-            return GeneratedImage.objects.filter(
-                conversation__user=self.request.user
-            ).order_by('-created_at')
-        return GeneratedImage.objects.all().order_by('-created_at')
+        return GeneratedImage.objects.filter(
+            conversation__user=self.request.user
+        ).order_by('-created_at')

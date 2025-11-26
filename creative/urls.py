@@ -24,7 +24,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('creative/', include('agents.urls')),
+    path('auth/', include('authentication.urls')),
+    path('', include('agents.urls')),  # Raiz aponta para home do agents
 ]
 
 

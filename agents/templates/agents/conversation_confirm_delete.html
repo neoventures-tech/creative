@@ -1,0 +1,75 @@
+{% extends 'agents/base.html' %}
+
+{% block title %}Confirmar Exclusao - Neo Creative{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body text-center p-5">
+                <div class="mb-4">
+                    <i class="bi bi-exclamation-triangle-fill text-warning" style="font-size: 4rem;"></i>
+                </div>
+
+                <h2 class="mb-3">Confirmar Exclusao</h2>
+
+                <div class="alert alert-warning mb-4">
+                    <i class="bi bi-info-circle"></i>
+                    <strong>Atencao!</strong> Esta acao nao pode ser desfeita.
+                </div>
+
+                <p class="text-muted mb-2">Voce esta prestes a deletar a seguinte conversa:</p>
+
+                <div class="card bg-light my-4">
+                    <div class="card-body">
+                        <h5 class="text-primary mb-3">
+                            <i class="bi bi-chat-square-text"></i> Conversa #{{ conversation.id }}
+                        </h5>
+
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <div class="mb-2">
+                                    <i class="bi bi-chat-dots text-primary"></i>
+                                    <strong>{{ conversation.messages.count }}</strong>
+                                </div>
+                                <small class="text-muted">Mensagens</small>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-2">
+                                    <i class="bi bi-images text-primary"></i>
+                                    <strong>{{ conversation.generated_images.count }}</strong>
+                                </div>
+                                <small class="text-muted">Imagens</small>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 pt-3 border-top">
+                            <small class="text-muted">
+                                <i class="bi bi-clock"></i>
+                                Ultima atualizacao: {{ conversation.updated_at|date:"d/m/Y H:i" }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-danger mb-4">
+                    <i class="bi bi-trash"></i>
+                    Todas as mensagens e imagens geradas serao permanentemente excluidas.
+                </p>
+
+                <form method="post" class="d-inline">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="bi bi-trash-fill"></i> Sim, Deletar Conversa
+                        </button>
+                        <a href="{% url 'agents:conversation_detail' conversation.pk %}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

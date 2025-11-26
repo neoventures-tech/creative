@@ -132,67 +132,53 @@ def generate_image(
         print("\n[4/6] Preparando prompt...")
         try:
             full_prompt = f"""
-Gere uma nova imagem mantendo o layout, estilo e paleta da imagem de referência enviada.
+Mantenha FIELMENTE o layout e estilo da imagem de referência (template).
 
-⚠️ IMPORTANTE: A imagem deve mostrar O PROBLEMA/SITUAÇÃO DE RISCO descrita no desafio abaixo, NÃO a solução ou comportamento correto.
+⚠️ CRÍTICO: Siga EXATAMENTE a estrutura visual do template.
 
-DESCRIÇÃO DO DESAFIO/CENÁRIO:
 {prompt}
 
 ---
 
-# 🎨 DIRETRIZES DE LAYOUT (Mining Hub)
+ESTRUTURA OBRIGATÓRIA (seguir template EXATAMENTE):
+1. **CABEÇALHO SUPERIOR**
+   - Faixa horizontal azul escuro no topo.
+   - Texto em branco no centro começando com: "COMO PODEMOS..." seguido da pergunta do desafio.
 
-## 1. Cabeçalho Superior Azul com Pergunta
-- Faixa azul no topo
-- Pergunta iniciando com "Como podemos…?" relacionada ao desafio
-- Texto em branco, destacado
+2. **PARTE ESQUERDA / CENTRO – CONTEXTO E PROBLEMA**
+   - Ilustrações em estilo cartoon técnico (equipamentos de mineração, operadores, processos, ambiente).
+   - Mostrar a situação atual e os problemas visuais (ex.: poeira, fumaça, vibração, sujeira, sucata, risco).
+   - Incluir pequenos textos próximos aos elementos, rótulos e explicações.
+   - Incluir ícones de alerta (triângulos vermelhos), setas, destaques e observações.
+   - Pode ter medições, gráficos simples, balões de fala ou anotações práticas.
+   - Mostrar erros, limitações ou dificuldades do processo atual.
 
-## 2. Área Principal com Ilustrações (centro/esquerda)
-- Desenhos em estilo **cartoon técnico industrial** mostrando:
-  - **A SITUAÇÃO DE RISCO/PROBLEMA descrita**
-  - Pessoas, máquinas, equipamentos no contexto problemático
-  - Riscos visíveis no ambiente
-- Ícones e elementos visuais:
-  - Triângulos de alerta vermelhos indicando perigos
-  - Setas explicativas apontando riscos
-  - Pequenas notas/balões identificando problemas
-- **FOCO: Mostrar o desafio/problema atual, não a solução**
+3. **BLOCO DIREITO – OBJETIVOS E BENEFÍCIOS**
+   - Criar um retângulo vertical em bege/amarelo claro.
+   - Dentro dele, incluir uma lista de itens marcados com estrelas (★).
+   - Cada item deve representar benefícios, melhorias ou resultados esperados.
+   - Acima da caixa, inserir um ícone de alvo, indicando o "objetivo da solução".
 
-## 3. Coluna Lateral Direita com Objetivos
-- Bloco retangular claro (bege/amarelo suave)
-- Lista com marcadores em estrela (★)
-- Destaca benefícios esperados e objetivos
-- Sempre posicionada à direita
+4. **ESTILO VISUAL**
+   - Estilo cartoon coerente, linhas grossas, contornos marcados, sombras leves.
+   - Paleta padrão: azul escuro, amarelo, bege, vermelho para alertas, tons suaves.
+   - Pequenas legendas espalhadas explicando elementos.
+   - Mistura equilibrada entre imagens e texto.
 
-## 4. Estilo Visual Padronizado
-- Cores: azul escuro, amarelo/bege, vermelho de alerta
-- Estilo cartoon uniforme (traço técnico industrial)
-- Elementos de comunicação:
-  - Ícones de alerta (triângulos vermelhos)
-  - Setas indicativas
-  - Balões/blocos de texto flutuantes
+5. **RODAPÉ**
+   - Colocar logos da empresa do desafio à esquerda.
+   - Colocar o logo "mininghub." à direita.
+   - Fundo cinza muito claro.
 
-## 5. Estrutura Narrativa: PROBLEMA em destaque
-1. **Situação problemática/risco** na região ilustrada central
-2. **Perigos e dificuldades** destacados com ícones visuais de alerta
-3. **Objetivos/metas** (não soluções detalhadas) na coluna direita
+6. **NARRATIVA VISUAL**
+   - O lado esquerdo sempre representa o PROBLEMA.
+   - O lado direito sempre representa a SOLUÇÃO / BENEFÍCIOS.
+   - Incluir sempre um contraste claro entre o “antes” e o “depois”.
 
-## 6. Logos no Rodapé
-- Logo da empresa patrocinadora (se aplicável)
-- Logo do **mininghub**
-- Posicionados no canto inferior direito
+Mantenha exatamente esse layout em todas as próximas criações.
+Inclua apenas os elementos específicos do desafio atual conforme fornecido.
 
----
-
-## 🎯 REGRA CRÍTICA
-**Ilustre fielmente a SITUAÇÃO DE RISCO descrita no desafio.**
-**NÃO mostre como resolver o problema ou comportamento correto.**
-**A imagem deve representar o CENÁRIO PROBLEMÁTICO.**
-
----
-
-Mantenha: layout de referência, estilo cartoon técnico industrial, paleta de cores, estrutura geral.
+IMPORTANTE: Manter PROPORÇÕES e POSICIONAMENTO do template original.
 """
             print(f"✓ Prompt preparado ({len(full_prompt)} caracteres)")
         except Exception as e:

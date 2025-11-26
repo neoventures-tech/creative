@@ -1,0 +1,233 @@
+{% extends 'agents/base.html' %}
+
+{% block title %}Neo Creative - IA para Geracao de Imagens{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row align-items-center min-vh-75 py-5">
+    <div class="col-lg-6 text-white mb-5 mb-lg-0">
+        <div class="hero-content">
+            <h1 class="display-3 fw-bold mb-4 animate-fade-in">
+                Ola! Eu sou o Neo Creative
+            </h1>
+            <p class="lead mb-4 animate-fade-in-delay-1">
+                Uma IA especializada em gerar imagens criativas para seus desafios e projetos.
+            </p>
+            <p class="fs-5 mb-5 animate-fade-in-delay-2">
+                Transformo suas ideias em imagens profissionais com inteligencia artificial.
+                Vamos criar juntos?
+            </p>
+            <div class="d-flex gap-3 animate-fade-in-delay-3">
+                <a href="{% url 'agents:conversation_create' %}" class="btn btn-lg btn-light px-5 py-3 shadow-lg">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Comecar Agora
+                </a>
+                <a href="#features" class="btn btn-lg btn-outline-light px-5 py-3">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Saiba Mais
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 animate-fade-in-delay-2">
+        <div class="hero-image text-center">
+            <i class="bi bi-palette-fill text-white" style="font-size: 15rem; opacity: 0.9;"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="row py-5" id="features">
+    <div class="col-12 text-center mb-5">
+        <h2 class="display-5 fw-bold text-white mb-3">O que eu posso fazer por voce?</h2>
+        <p class="text-white-50 fs-5">Descubra como posso ajudar seus projetos</p>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon mb-3">
+                    <i class="bi bi-lightbulb-fill text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h3 class="h4 mb-3">Ideias Criativas</h3>
+                <p class="text-muted">
+                    Transformo seus conceitos e desafios em representacoes visuais unicas e impactantes.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon mb-3">
+                    <i class="bi bi-chat-dots-fill text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h3 class="h4 mb-3">Conversas Inteligentes</h3>
+                <p class="text-muted">
+                    Dialogue comigo de forma natural. Entendo suas necessidades e ajudo a refinar suas ideias.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon mb-3">
+                    <i class="bi bi-images text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h3 class="h4 mb-3">Imagens Profissionais</h3>
+                <p class="text-muted">
+                    Gero imagens de alta qualidade seguindo estilos e layouts especificos para seu projeto.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How it Works Section -->
+<div class="row py-5 mt-4">
+    <div class="col-12 text-center mb-5">
+        <h2 class="display-5 fw-bold text-white mb-3">Como funciona?</h2>
+        <p class="text-white-50 fs-5">Simples e rapido em 3 passos</p>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 step-card">
+            <div class="card-body p-4">
+                <div class="step-number mb-3">
+                    <span class="badge bg-primary rounded-circle p-3" style="font-size: 1.5rem;">1</span>
+                </div>
+                <h4 class="mb-3">Inicie uma Conversa</h4>
+                <p class="text-muted mb-0">
+                    Clique em "Comecar Agora" e comece a conversar comigo sobre seu projeto ou desafio.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 step-card">
+            <div class="card-body p-4">
+                <div class="step-number mb-3">
+                    <span class="badge bg-primary rounded-circle p-3" style="font-size: 1.5rem;">2</span>
+                </div>
+                <h4 class="mb-3">Descreva sua Ideia</h4>
+                <p class="text-muted mb-0">
+                    Conte-me sobre o que voce precisa. Quanto mais detalhes, melhor sera o resultado!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 step-card">
+            <div class="card-body p-4">
+                <div class="step-number mb-3">
+                    <span class="badge bg-primary rounded-circle p-3" style="font-size: 1.5rem;">3</span>
+                </div>
+                <h4 class="mb-3">Receba sua Imagem</h4>
+                <p class="text-muted mb-0">
+                    Em instantes, gero uma imagem profissional baseada na sua descricao e feedback.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="row py-5 mt-4">
+    <div class="col-12">
+        <div class="card cta-card text-center p-5">
+            <div class="card-body">
+                <h2 class="display-4 fw-bold mb-4">Pronto para criar?</h2>
+                <p class="lead text-muted mb-4">
+                    Comece agora mesmo e veja a magia da IA transformando suas ideias em realidade.
+                </p>
+                <a href="{% url 'agents:conversation_create' %}" class="btn btn-primary btn-lg px-5 py-3">
+                    <i class="bi bi-rocket-takeoff-fill me-2"></i>
+                    Criar Minha Primeira Imagem
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .min-vh-75 {
+        min-height: 75vh;
+    }
+
+    .animate-fade-in {
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .animate-fade-in-delay-1 {
+        animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .animate-fade-in-delay-2 {
+        animation: fadeInUp 0.8s ease-out 0.4s backwards;
+    }
+
+    .animate-fade-in-delay-3 {
+        animation: fadeInUp 0.8s ease-out 0.6s backwards;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .feature-card {
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(6, 147, 227, 0.2) !important;
+    }
+
+    .step-card {
+        border-left: 4px solid var(--primary-cyan);
+    }
+
+    .cta-card {
+        background: linear-gradient(135deg, rgba(6, 147, 227, 0.1), rgba(155, 81, 224, 0.1));
+        border: none;
+    }
+
+    .btn-light {
+        background: white;
+        color: var(--primary-cyan);
+        font-weight: 600;
+        border: none;
+    }
+
+    .btn-light:hover {
+        background: var(--primary-cyan);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-light {
+        border: 2px solid white;
+        color: white;
+        font-weight: 600;
+    }
+
+    .btn-outline-light:hover {
+        background: white;
+        color: var(--primary-cyan);
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}

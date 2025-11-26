@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{Título do Desafio}}</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", "Arial Black", Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e0e7ef 0%, #f5f7fa 100%);
+      display: flex;
+      justify-content: center;
+      padding: 30px 20px;
+      min-height: 100vh;
+    }
+
+    .infografico {
+      width: 1400px;
+      max-width: 100%;
+      background: linear-gradient(to bottom, #ffffff 0%, #f8fbff 100%);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      border: 3px solid #ffffff;
+    }
+
+    /* Cabeçalho */
+    .infografico__header {
+      background: linear-gradient(135deg, #1e5a8e 0%, #2d7ab8 100%);
+      color: #ffffff;
+      padding: 24px 32px;
+      font-weight: 900;
+      font-size: 20px;
+      text-transform: uppercase;
+      line-height: 1.4;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .infografico__header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0 40px 40px;
+      border-color: transparent transparent rgba(255,255,255,0.1) transparent;
+    }
+
+    /* Área principal: esquerda + direita */
+    .infografico__content {
+      display: flex;
+      padding: 28px;
+      gap: 24px;
+      background: #fafcfe;
+    }
+
+    /* Coluna esquerda (problema / contexto) */
+    .infografico__left {
+      flex: 2.2;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 2px solid #e8f1f8;
+    }
+
+    .section-title {
+      font-weight: 900;
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: #1e3a5f;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-left: 4px solid #2d7ab8;
+      padding-left: 10px;
+    }
+
+    .section-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #2c3e50;
+      font-weight: 500;
+    }
+
+    .section-text ul {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .section-text li {
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .alert {
+      color: #d32f2f;
+      font-weight: 900;
+      margin-top: 8px;
+      background: #ffebee;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border-left: 4px solid #d32f2f;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .alert::before {
+      content: "⚠️";
+      font-size: 18px;
+    }
+
+    /* Simulação de "blocos de ilustração" */
+    .mock-illustration {
+      border: 2px dashed #b0c4de;
+      border-radius: 10px;
+      padding: 20px;
+      font-size: 12px;
+      color: #546e7a;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f8 100%);
+      text-align: center;
+      font-weight: 600;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock-illustration::before {
+      content: "🖼️";
+      position: absolute;
+      font-size: 48px;
+      opacity: 0.15;
+    }
+
+    /* Coluna direita (benefícios / objetivos) */
+    .infografico__right {
+      flex: 1;
+      background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 2px solid #ffe680;
+    }
+
+    .target-icon {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 36px;
+      opacity: 0.7;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .right-title {
+      font-weight: 900;
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: #b8860b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding-right: 50px;
+    }
+
+    .benefits-list {
+      list-style: none;
+      font-size: 13px;
+      line-height: 1.8;
+      color: #4a4a4a;
+    }
+
+    .benefits-list li {
+      margin-bottom: 10px;
+      padding-left: 24px;
+      position: relative;
+      font-weight: 600;
+    }
+
+    .benefits-list li::before {
+      content: "⭐";
+      position: absolute;
+      left: 0;
+      font-size: 16px;
+    }
+
+    /* Rodapé */
+    .infografico__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px;
+      background: linear-gradient(to right, #34a853 0%, #00a86b 100%);
+      font-size: 12px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .footer-logos {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logo-box {
+      height: 40px;
+      padding: 0 20px;
+      border-radius: 6px;
+      background: #ffffff;
+      border: 2px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #2c3e50;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .highlight-box {
+      background: #e8f5e9;
+      border: 2px solid #66bb6a;
+      border-radius: 8px;
+      padding: 14px;
+      margin: 12px 0;
+    }
+
+    .highlight-box .section-title {
+      border-left-color: #66bb6a;
+      color: #2e7d32;
+    }
+
+    @media (max-width: 1000px) {
+      .infografico__content {
+        flex-direction: column;
+      }
+      .infografico__header {
+        font-size: 18px;
+        padding: 20px 24px;
+      }
+      .target-icon {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="infografico">
+  <!-- CABEÇALHO -->
+  <header class="infografico__header">
+    {{COMO PODEMOS DESCREVER O DESAFIO AQUI EM FORMA DE PERGUNTA?}}
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="infografico__content">
+
+    <!-- LADO ESQUERDO – CONTEXTO / PROBLEMA -->
+    <section class="infografico__left">
+      <div>
+        <div class="section-title">Contexto / Operação</div>
+        <p class="section-text">
+          {{Descreva aqui o processo, equipamentos, pessoas envolvidas e o ambiente onde o problema acontece.}}
+        </p>
+      </div>
+
+      <div class="mock-illustration">
+        {{Área reservada para representar, em ilustrações, os equipamentos, operadores, correias, caminhões, sondas, água, etc.}}
+      </div>
+
+      <div>
+        <div class="section-title">Situação atual</div>
+        <p class="section-text">
+          {{Explique o que é feito hoje, quais métodos são usados e como os dados/medições são coletados (ou não).}}
+        </p>
+      </div>
+
+      <div>
+        <div class="section-title">Problemas e riscos</div>
+        <p class="section-text">
+          {{Liste os principais problemas: ergonomia, segurança, custo, paradas de produção, impacto ambiental, falta de padronização, etc.}}
+        </p>
+        <p class="alert">
+          {{Frase de destaque em vermelho, enfatizando o principal risco ou limitação.}}
+        </p>
+      </div>
+
+      <div class="mock-illustration">
+        {{Espaço para ícones de alerta, setas, pequenas legendas e exemplos do “antes”: paradas, falhas, retrabalho, esforço físico, etc.}}
+      </div>
+    </section>
+
+    <!-- LADO DIREITO – BENEFÍCIOS / OBJETIVOS -->
+    <aside class="infografico__right">
+      <div class="target-icon">🎯</div>
+      <div class="right-title">Objetivos e benefícios esperados</div>
+      <ul class="benefits-list">
+        <li>{{Benefício 1 – ex.: reduzir riscos, medir em tempo real, aumentar segurança}}</li>
+        <li>{{Benefício 2 – ex.: aumentar eficiência, diminuir paradas, reduzir custos}}</li>
+        <li>{{Benefício 3 – ex.: melhorar conforto do operador, ergonomia, usabilidade}}</li>
+        <li>{{Benefício 4 – ex.: padronização, rastreabilidade, dados confiáveis}}</li>
+        <li>{{Benefício 5 – ex.: aderência a normas e legislações}}</li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="infografico__footer">
+    <div class="footer-logos">
+      <div class="logo-box">{{Logo Empresa}}</div>
+      <div class="logo-box">mininghub.</div>
+    </div>
+    <div>
+      {{Texto opcional: ano, edição do programa, observações legais etc.}}
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
