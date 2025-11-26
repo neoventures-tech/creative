@@ -64,6 +64,18 @@ class ConversationCreateView(LoginRequiredMixin, View):
     def get(self, request):
         # Cria a conversa para o usuário logado
         conversation = Conversation.objects.create(user=request.user)
+
+        # Envia a primeira mensagem automaticamente
+        try:
+            chat_with_agent(
+                conversation=conversation,
+                user_message="vamos lá",
+                model_name='gpt-4o',
+                temperature=0.7
+            )
+        except Exception as e:
+            messages.warning(request, f'Conversa criada, mas houve um erro ao enviar a primeira mensagem: {str(e)}')
+
         messages.success(request, 'Conversa criada com sucesso!')
         # Redireciona para a página de detalhes da conversa
         return redirect('agents:conversation_detail', pk=conversation.pk)

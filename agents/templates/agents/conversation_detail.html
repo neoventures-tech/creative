@@ -189,6 +189,10 @@ document.getElementById('chatForm').addEventListener('submit', async function(e)
 window.addEventListener('load', function() {
     const messagesContainer = document.getElementById('messagesContainer');
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Retornar foco para o input após reload
+    const messageInput = document.getElementById('messageInput');
+    messageInput.focus();
 });
 </script>
 {% endblock %}
