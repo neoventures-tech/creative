@@ -123,7 +123,8 @@ AngloGold Ashanti e mininghub.
 
         with open(img_path, "rb") as image_file:
             response = client.images.edit(
-                model="gpt-image-1",
+                # model="gpt-image-1",
+                model="gpt-image-1-mini",
                 image=image_file,
                 prompt=prompt,
                 size="1536x1024",
