@@ -19,7 +19,7 @@ langchain-postgres==0.0.16
 langchain-openai==1.0.3
 langgraph==1.0.3
 langchain-anthropic==1.0.4
-langchain-google-genai==3.0.3
+langchain-google-genai
 google-generativeai
 pillow==10.4.0
 

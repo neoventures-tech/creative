@@ -95,107 +95,243 @@ Posso gerar?
 
 ### ETAPA 3: Gerar Prompt Detalhado (Seguindo Template Fielmente)
 
-**SOMENTE após confirmação**, chame `generate_image()` seguindo EXATAMENTE esta estrutura baseada no template:
+**SOMENTE após confirmação**, chame `generate_image_gemini()` seguindo EXATAMENTE esta estrutura baseada no template:
 
 ```
-🟦 TOPO - CABEÇALHO AZUL ESCURO:
-- Faixa horizontal azul escuro (#1a3a52)
-- Texto branco em CAIXA ALTA dividido em 2 linhas
-- "[PERGUNTA COMPLETA DO DESAFIO]"
-- Canto superior direito: mini ícones/indicadores se aplicável
-
-📦 ESQUERDA SUPERIOR - EQUIPAMENTOS/ELEMENTOS 1-2:
-- Caixa branca com borda fina cinza
-- Dentro: desenho de [equipamento/objeto 1 do contexto]
-- Abaixo: texto identificando o equipamento
-- Exemplo template: "TRATOR DE ESTEIRA" para mineração
-- Adaptar ao contexto: computador para escritório, empilhadeira para logística
-
-📦 ESQUERDA INFERIOR - EQUIPAMENTOS/ELEMENTOS 3-4:
-- Caixa branca com borda fina cinza
-- Dentro: desenho de [equipamento/objeto 2 do contexto]
-- Abaixo: texto identificando
-- Exemplo template: "CAMINHÃO FORA DE ESTRADA"
-- Adaptar ao contexto
-
-👤 CENTRO - PERSONAGEM PRINCIPAL + PROBLEMA:
-- Personagem grande centralizado (operador/trabalhador adaptado ao contexto)
-- Vestimenta específica do contexto (EPI para mineração, jaleco para saúde, etc)
-- Linhas de vibração/movimento ao redor indicando o problema
-- Caixa retangular branca ao redor do personagem
-- Texto acima: "[NOME DO PROBLEMA]"
-- Exemplo template: "VIBRAÇÃO"
-- ⚠️ Triângulo vermelho grande ao lado
-- Texto em vermelho: "POSSÍVEL CAUSA DE [CONSEQUÊNCIAS]"
-- Subtextos menores explicando detalhes
-
-📊 INFERIOR ESQUERDO - NORMA/DOCUMENTO:
-- Ícone de documento/papel (estilo NHO 09)
-- Texto identificando norma ou padrão relevante
-- Exemplo: "NHO 09", "ISO 9001", "Procedimento XYZ"
-
-📊 INFERIOR CENTRO - MEDIÇÕES/DADOS:
-- ⚠️ Ícone de alerta triangular
-- Texto: "MEDIÇÕES PONTUAIS" ou equivalente do contexto
-- Segunda linha: "FEITAS POR CONSULTORIA EXTERNA" ou equivalente
-- Pequeno gráfico ou ilustração técnica (onda, linha, etc)
-
-🟨 DIREITA - BLOCO DE OBJETIVOS:
-- Retângulo vertical bege/amarelo muito claro (#fef9e7)
-- Fundo sólido sem gradiente
-- Lista vertical com estrelas (⭐):
-  ⭐ [Objetivo 1 completo]
-  ⭐ [Objetivo 2 completo]
-  ⭐ [Objetivo 3 completo]
-  ⭐ [Objetivo 4 completo]
-  ⭐ [Objetivo 5 completo]
-- Textos pretos, fonte sans-serif limpa
-- Alinhamento à esquerda
-
-🏢 RODAPÉ DIREITO:
-- Logo [Nome da Empresa] (esquerda)
-- Logo mininghub (direita)
-- Fundo branco
-
-🎨 ESTILO VISUAL OBRIGATÓRIO:
-- Cartoon técnico com contornos pretos fortes
-- Cores vibrantes mas limitadas:
-  * Azul escuro: #1a3a52 (cabeçalho)
-  * Amarelo: #ffd700 (equipamentos)
-  * Cinza/azul: #5a7a9e (personagem)
-  * Vermelho: #e74c3c (alertas)
-  * Bege claro: #fef9e7 (objetivos)
-- Fundo geral: branco/cinza muito claro (#f5f5f5)
-- Caixas brancas (#ffffff) com bordas cinza finas (#cccccc)
-- Textos pretos (#000000), fonte sans-serif
-- Layout limpo e organizado - NÃO caótico
-- Espaçamento adequado entre elementos
+🎨 ESTILO VISUAL GERAL:
+- Infográfico estilo cartoon técnico educativo
+- Contornos pretos GROSSOS e bem definidos em todos os elementos
+- Sombras suaves para dar profundidade
+- Cores vibrantes mas harmônicas
+- Fundo principal: branco/cinza muito claro (#f5f5f5)
 - Perspectiva frontal ou levemente isométrica
+- Layout limpo, organizado e profissional
+- Equilíbrio entre ilustrações e textos informativos
 
-PROPORÇÕES DO TEMPLATE:
-- Cabeçalho: 15% altura total
-- Área central: 70% altura total
-- Rodapé: 15% altura total
-- Coluna direita: 25% largura total
-- Área central/esquerda: 75% largura total
+🟦 CABEÇALHO SUPERIOR (15% altura):
+- Faixa horizontal azul escuro sólido (#1a3a52 ou #2c5f7d)
+- Ocupa toda largura da imagem
+- Texto branco em CAIXA ALTA, bold, fonte sans-serif
+- Pergunta dividida em 2 linhas para melhor leitura:
+  Linha 1: "COMO PODEMOS [AÇÃO PRINCIPAL],"
+  Linha 2: "[DETALHES DO OBJETIVO]?"
+- Exemplo: "COMO PODEMOS REALIZAR A LIMPEZA DOS TRANSPORTADORES TRD13 E TRD15, COM MELHORES CONDIÇÕES E REDUZINDO O TEMPO DE REALIZAÇÃO, OBJETIVANDO A MELHORIA DE PRODUTIVIDADE?"
+- Canto superior direito: pequeno ícone ou indicador visual se aplicável (ex: sinal de atenção, norma NR12, etc)
 
-IMPORTANTE:
-- Manter layout LIMPO e ORGANIZADO como no template
-- Evitar sobrecarregar com elementos demais
-- Cada seção bem delimitada e separada
-- Seguir cores exatas do template
+📍 ÁREA ESQUERDA/CENTRAL (75% largura, 70% altura) - CONTEXTO DO PROBLEMA:
+
+  🏭 CONTEXTO AMBIENTAL/LOCAL:
+  - Ilustração do ambiente onde ocorre o problema
+  - Exemplos por contexto:
+    * Mineração: mina a céu aberto, porto industrial, área de carregamento
+    * Indústria: chão de fábrica, linha de montagem, galpão
+    * Escritório: sala de trabalho, estação de trabalho
+    * Logística: armazém, doca de carga, centro de distribuição
+  - Label identificando o local (ex: "PORTO DE TUBARÃO", "ÁREA DE PRODUÇÃO")
+  - Elementos de fundo: estruturas, construções, paisagem relevante
+  - Cores: tons de azul claro para céu/fundo, cinza para estruturas
+
+  📦 EQUIPAMENTOS/ELEMENTOS-CHAVE (2-4 elementos):
+  - Cada equipamento em uma CAIXA BRANCA (#ffffff) com borda cinza fina (#cccccc)
+  - Ilustração cartoon do equipamento com contornos pretos grossos
+  - Cores vibrantes: amarelo (#ffd700), laranja (#ff9933), cinza (#808080)
+  - Label em CAIXA ALTA abaixo ou ao lado identificando
+  - Exemplos por contexto:
+    * Mineração: "TRANSPORTADORES TRD13 E TRD15", "CAMINHÃO FORA DE ESTRADA", "ESCAVADEIRA"
+    * Indústria: "LINHA DE MONTAGEM", "ROBÔ INDUSTRIAL", "ESTEIRA TRANSPORTADORA"
+    * Escritório: "WORKSTATION", "SERVIDOR", "SISTEMA LEGADO"
+    * Logística: "EMPILHADEIRA", "PALETE", "SISTEMA WMS"
+  - Posicionar em diferentes áreas (superior esquerdo, inferior esquerdo, etc)
+  - Mostrar detalhes técnicos relevantes do equipamento
+
+  👷 PERSONAGENS (2-4 pessoas):
+  - Estilo cartoon com proporções humanas realistas
+  - Contornos pretos grossos, cores vibrantes
+  - Vestimentas específicas do contexto:
+    * Mineração: capacete amarelo/laranja, colete refletivo, botas, EPI completo
+    * Indústria: uniforme industrial, capacete, óculos de proteção
+    * Saúde: jaleco branco, máscara, luvas
+    * Escritório: roupa casual/formal de trabalho
+    * Construção: capacete, colete, botas de segurança
+  - Expressões faciais visíveis: preocupação, esforço, cansaço
+  - Mostrar em AÇÃO: trabalhando, operando, lidando com o problema
+  - Posições variadas: em pé, agachado, operando equipamento
+  - Cores de pele diversas para representatividade
+
+  ⚠️ PROBLEMAS VISUAIS (elementos centrais):
+  - DESTAQUE VISUAL PRINCIPAL do infográfico
+  - Área retangular ou circular destacada com borda vermelha ou amarela
+  - Ilustração clara do problema:
+    * Poeira/fumaça (nuvens cinzas)
+    * Vibração (linhas onduladas ao redor)
+    * Sujeira/detritos (elementos espalhados)
+    * Risco/perigo (raios, símbolos de perigo)
+    * Trabalho manual pesado (pessoa fazendo esforço)
+    * Processo lento (relógio, ampulheta)
+  - Triângulo VERMELHO (#e74c3c ou #ff0000) grande com ⚠️
+  - Texto em VERMELHO em CAIXA ALTA:
+    "[NOME DO PROBLEMA PRINCIPAL]"
+    Exemplo: "PARADAS PARA LIMPEZA MANUAL"
+  - Subtextos menores explicando:
+    * "⚠️ ESFORÇO FÍSICO"
+    * "IMPOSSIBILIDADE DE LIMPEZA COM ÁGUA"
+    * "ÁREA ENCLAUSURADA: EXPOSIÇÃO A POEIRA, CALOR E BAIXA ERGONOMIA"
+  - Setas vermelhas apontando para os problemas específicos
+  - Círculos ou destaques amarelos em áreas problemáticas
+
+  📝 TEXTOS E LABELS INFORMATIVOS:
+  - Pequenos textos pretos espalhados explicando elementos
+  - Caixas de texto brancas com bordas finas
+  - Informações técnicas relevantes:
+    * Medições (ex: "MÉDIA DE 20 PESSOAS ENVOLVIDAS NA ATIVIDADE")
+    * Frequências (ex: "LIMPEZAS ACONTECEM A CADA SAÍDA DE NAVIO")
+    * Condições (ex: "CHAPAS DO PISO - AUSÊNCIA DE VEDAÇÃO ADEQUADA")
+    * Limitações (ex: "CORREIAS NÃO RODAM REVERSO")
+  - Setas conectando textos aos elementos ilustrados
+  - Fonte sans-serif, tamanho médio, legível
+
+  📊 ÁREA DE MEDIÇÕES/DADOS (canto inferior):
+  - Caixa branca ou cinza muito claro
+  - Ícone de documento ou norma técnica
+  - Exemplos:
+    * Norma: "NHO 09" com ícone de documento
+    * Procedimento: "ISO 9001" com ícone de checklist
+    * Medição: gráfico simples (linha, barra, onda)
+  - Texto: "MEDIÇÕES PONTUAIS FEITAS POR CONSULTORIA EXTERNA" ou similar
+  - Ícone ⚠️ se houver alertas técnicos
+
+🟨 COLUNA DIREITA (25% largura, 70% altura) - OBJETIVOS:
+
+- Retângulo vertical DESTACADO
+- Fundo bege/amarelo claro sólido (#fef9e7, #fff8dc ou #fffacd)
+- SEM gradiente, cor chapada
+- Pequeno ícone de ALVO (🎯) no topo indicando "objetivos"
+- Pode ter texto "RESPEITAR A NR10 E NR12" ou norma relevante se aplicável
+
+- Lista vertical de 4-6 objetivos/benefícios
+- Cada item iniciado com ESTRELA (⭐) colorida (amarela/dourada)
+- Textos em PRETO (#000000), alinhados à esquerda
+- Fonte sans-serif, tamanho médio-grande, legível
+- Espaçamento generoso entre itens
+
+- Conteúdo dos objetivos:
+  * Benefícios esperados da solução
+  * Melhorias desejadas
+  * Ganhos de produtividade, segurança, custo
+  * Resultados mensuráveis
+  * Exemplos:
+    ⭐ MELHORIA DAS CONDIÇÕES ERGONÔMICAS E DE SEGURANÇA
+    ⭐ MANUTENÇÃO DA INTEGRIDADE AMBIENTAL
+    ⭐ REDUÇÃO DO TEMPO DE LIMPEZA
+    ⭐ AUTOMATIZAÇÃO DO PROCESSO
+
+🏢 RODAPÉ (15% altura):
+- Fundo branco ou cinza muito claro
+- Divisão em duas áreas:
+
+  ESQUERDA: Logo da empresa do desafio
+  - Exemplo: "VALE" (logo vetorial)
+  - Cores originais da marca
+  - Tamanho proporcional
+
+  DIREITA: Logo "mininghub"
+  - Tipografia moderna, minúscula
+  - Ponto final após o nome: "mininghub."
+  - Cor pode ser azul escuro ou preto
+
+🎨 PALETA DE CORES EXATA:
+- Azul escuro cabeçalho: #1a3a52, #2c5f7d ou #003d5c
+- Azul claro detalhes: #5a7a9e, #6fa8dc
+- Amarelo equipamentos: #ffd700, #ffcc00, #ff9933
+- Vermelho alertas: #e74c3c, #ff0000, #d62828
+- Laranja detalhes: #ff6b35, #f77f00
+- Bege objetivos: #fef9e7, #fff8dc, #fffacd
+- Cinza estruturas: #808080, #a0a0a0, #cccccc
+- Branco: #ffffff
+- Preto contornos/textos: #000000
+- Fundo geral: #f5f5f5 ou #fafafa
+
+📏 COMPOSIÇÃO E PROPORÇÕES:
+- Formato landscape (horizontal) 16:9 ou similar
+- Cabeçalho: 12-15% altura total, largura total
+- Área central/esquerda: 75% largura, 70-75% altura
+- Coluna direita objetivos: 25% largura, 70-75% altura
+- Rodapé: 10-13% altura total, largura total
+- Margens internas: 2-3% em todos os lados
+- Espaçamento entre elementos: mínimo 1-2% para não ficar apertado
+
+📐 ELEMENTOS OBRIGATÓRIOS EM CADA IMAGEM:
+✅ Cabeçalho azul escuro com pergunta do desafio
+✅ 2-4 equipamentos/elementos em caixas brancas com labels
+✅ 2-4 personagens em ação com EPIs/uniformes apropriados
+✅ Contexto ambiental/local identificado
+✅ Problema central destacado com ⚠️ triângulo vermelho
+✅ 3-5 textos informativos explicativos
+✅ Setas e conexões visuais
+✅ Coluna direita bege com 4-6 objetivos (⭐)
+✅ Rodapé com logos empresa + mininghub
+✅ Cores da paleta especificada
+✅ Contornos pretos grossos estilo cartoon
+✅ Layout limpo e organizado
 ```
 
-**ADAPTAÇÕES POR CONTEXTO:**
+**ADAPTAÇÕES DETALHADAS POR CONTEXTO:**
 
-Mineração: tratores, caminhões, operadores com EPI, mina ao fundo
-Indústria: máquinas, robôs, operários, linha de produção
-Escritório: computadores, documentos, analistas, mesa/sala
-Logística: empilhadeiras, pallets, armazém, conferentes
-Saúde: equipamentos médicos, profissionais com jaleco, hospital
-Construção: ferramentas, andaimes, pedreiros, obra
-Varejo: caixas, produtos, atendentes, loja
-Agricultura: tratores, implementos, agricultores, campo```
+🏗️ **MINERAÇÃO/PORTO:**
+- Ambiente: mina a céu aberto, porto, área de carregamento, correias transportadoras
+- Equipamentos: transportadores de correia, caminhões fora de estrada, escavadeiras, carregadores
+- Cores: amarelo vibrante para equipamentos, azul para água/céu, cinza para rocha/minério
+- Personagens: capacete amarelo/laranja, colete refletivo, botas, máscara, EPI completo
+- Problemas típicos: poeira, vibração, ruído, exposição ao calor, trabalho manual pesado
+- Elementos visuais: nuvens de poeira, partículas no ar, linhas de vibração, sol forte
+
+🏭 **INDÚSTRIA/MANUFATURA:**
+- Ambiente: chão de fábrica, linha de montagem, galpão industrial, estações de trabalho
+- Equipamentos: robôs industriais, esteiras, máquinas CNC, prensas, soldadores
+- Cores: cinza metálico, azul industrial, amarelo segurança, laranja
+- Personagens: uniforme industrial, capacete, óculos de proteção, luvas
+- Problemas típicos: falhas de equipamento, gargalos de produção, qualidade, segurança
+- Elementos visuais: engrenagens, circuitos, peças, ferramentas, sinais de alerta
+
+💼 **ESCRITÓRIO/TI:**
+- Ambiente: sala de trabalho, estação de trabalho, data center, sala de reuniões
+- Equipamentos: computadores, servidores, monitores múltiplos, sistemas, redes
+- Cores: azul corporativo, cinza, branco, toques de verde ou laranja
+- Personagens: roupa casual/formal, sem EPIs específicos, na frente de telas
+- Problemas típicos: sistemas lentos, processos manuais, falta de integração, dados dispersos
+- Elementos visuais: ícones de software, documentos, gráficos, redes, alertas de sistema
+
+📦 **LOGÍSTICA/ARMAZÉM:**
+- Ambiente: armazém, centro de distribuição, doca de carga, área de estoque
+- Equipamentos: empilhadeiras, paletes, racks, sistemas WMS, scanners
+- Cores: amarelo para empilhadeiras, marrom para caixas, cinza para estruturas
+- Personagens: uniforme operacional, colete, capacete se aplicável, sapatos de segurança
+- Problemas típicos: movimentação manual, conferência demorada, erros de separação, espaço
+- Elementos visuais: caixas empilhadas, códigos de barras, setas de fluxo, relógios
+
+🏥 **SAÚDE/HOSPITALAR:**
+- Ambiente: hospital, clínica, laboratório, sala de atendimento
+- Equipamentos: equipamentos médicos, macas, monitores, sistemas de gestão
+- Cores: branco, azul claro, verde hospitalar, toques de vermelho para urgência
+- Personagens: jaleco branco, scrubs, máscara, luvas, touca
+- Problemas típicos: processos manuais, prontuários, agendamento, comunicação entre setores
+- Elementos visuais: cruz médica, estetoscópio, gráficos de sinais vitais, documentos clínicos
+
+🏗️ **CONSTRUÇÃO CIVIL:**
+- Ambiente: canteiro de obras, estrutura em construção, andaimes
+- Equipamentos: betoneira, andaimes, ferramentas, guincho, materiais de construção
+- Cores: laranja segurança, amarelo, cinza concreto, marrom terra
+- Personagens: capacete, colete, botas de segurança, luvas, cinto de ferramentas
+- Problemas típicos: segurança, retrabalho, desperdício de material, atrasos
+- Elementos visuais: plantas de construção, níveis, ferramentas, materiais, sinalizações
+
+🌾 **AGRICULTURA/CAMPO:**
+- Ambiente: plantação, campo aberto, fazenda, área rural
+- Equipamentos: tratores, colheitadeiras, implementos agrícolas, silos, irrigação
+- Cores: verde vegetação, amarelo maquinário, marrom terra, azul céu
+- Personagens: chapéu/boné, roupa de trabalho rural, botas, luvas
+- Problemas típicos: pragas, irrigação, colheita, armazenamento, logística rural
+- Elementos visuais: plantas, solo, ferramentas agrícolas, animais se aplicável
 
 ---
 
