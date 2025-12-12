@@ -199,7 +199,7 @@ IMPORTANTE: Manter PROPORÇÕES e POSICIONAMENTO do template original.
                 print(f"   Enviando arquivo: {reference_image_path}")
                 response = client.images.edit(
                     # model="gpt-image-1",
-                    model="gpt-image-1-mini",
+                    model="gpt-image-1",
                     image=image_file,
                     prompt=full_prompt,
                     size=size,
