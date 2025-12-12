@@ -21,6 +21,7 @@ class AgentContext:
     """Schema do contexto passado para as tools via ToolRuntime."""
     conversation: Any
     reference_image_path: str
+    reference_layout_image_path: str
 
 
 def load_system_prompt_from_file() -> str:
@@ -181,10 +182,13 @@ def chat_with_agent(
             print(f"   Caminho da imagem: {reference_image_path}")
             print(f"   Total de mensagens: {len(messages)}")
 
+            reference_layout_image_path = str(pathlib.Path(__file__).parent / "data" / "layout.png")
+
             # Criar contexto usando o dataclass
             agent_context = AgentContext(
                 conversation=conversation,
-                reference_image_path=reference_image_path
+                reference_image_path=reference_image_path,
+                reference_layout_image_path=reference_layout_image_path
             )
             print("✓ Contexto preparado")
         except Exception as e:

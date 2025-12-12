@@ -305,6 +305,7 @@ def generate_image_gemini(
         try:
             conversation = runtime.context.conversation
             reference_image_path = runtime.context.reference_image_path
+            reference_layout_image_path = runtime.context.reference_layout_image_path
             print(f"✓ Contexto extraído")
             print(f"   - Conversation ID: {conversation.id if conversation else 'None'}")
             print(f"   - Imagem referência: {reference_image_path}")
@@ -351,7 +352,7 @@ def generate_image_gemini(
 
         print("\n[4/6] Preparando prompt e imagem...")
         try:
-
+            layout_reference = Image.open(reference_layout_image_path)
             if is_editing:
                 last_image = GeneratedImage.objects.filter(
                     conversation=conversation.id
@@ -385,6 +386,7 @@ def generate_image_gemini(
                 reference = Image.open(reference_image_path)
                 print(f"✓ Default reference image loaded: {reference.size}")
 
+
         except Exception as e:
             print(f"✗ ERRO ao preparar prompt: {e}")
             import traceback
@@ -396,9 +398,11 @@ def generate_image_gemini(
             # Configurar modelo Gemini 3 Pro - mais avançado para geração de imagens
             model = genai.GenerativeModel("gemini-3-pro-image-preview")
 
+
+
             # Gerar imagem
             response = model.generate_content(
-                [prompt, reference],
+                [prompt, reference, layout_reference],
                 generation_config=genai.GenerationConfig(
                     temperature=1.0,
                 )
