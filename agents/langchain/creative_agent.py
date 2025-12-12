@@ -177,7 +177,7 @@ def chat_with_agent(
             # Adicionar mensagem atual do usuário (apenas texto)
             messages.append(HumanMessage(content=user_message))
 
-            reference_image_path = str(pathlib.Path(__file__).parent / "data" / "template.jpeg")
+            reference_image_path = str(pathlib.Path(__file__).parent / "data" / "template.png")
             print(f"   Caminho da imagem: {reference_image_path}")
             print(f"   Total de mensagens: {len(messages)}")
 

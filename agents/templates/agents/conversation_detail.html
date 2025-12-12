@@ -3,196 +3,193 @@
 {% block title %}Conversa #{{ conversation.id }} - Neo Creative{% endblock %}
 
 {% block content %}
-<div class="row mb-4">
-    <div class="col">
-        <h1 class="text-white mb-3">
-            <i class="bi bi-chat-square-text-fill"></i> Conversa #{{ conversation.id }}
-        </h1>
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="text-white mb-3">
+                <i class="bi bi-chat-square-text-fill"></i> Conversa #{{ conversation.id }}
+            </h1>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'agents:conversation_list' %}" class="btn btn-light">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
     </div>
-    <div class="col-auto">
-        <a href="{% url 'agents:conversation_list' %}" class="btn btn-light">
-            <i class="bi bi-arrow-left"></i> Voltar
-        </a>
-    </div>
-</div>
 
-<div class="row">
-    <!-- Chat Area -->
-    <div class="col-lg-8">
-        <div class="chat-container">
-            <div class="messages-container" id="messagesContainer">
-                {% for message in chat_messages %}
-                <div class="message {{ message.role }}" data-message-id="{{ message.id }}">
-                    <div class="d-flex align-items-start">
-                        <div class="me-2">
-                            {% if message.role == 'user' %}
-                            <i class="bi bi-person-circle fs-4 text-primary"></i>
-                            {% else %}
-                            <i class="bi bi-robot fs-4 text-secondary"></i>
-                            {% endif %}
-                        </div>
-                        <div class="flex-grow-1">
-                            <strong>{{ message.role|title }}</strong>
-                            <div class="mb-1 mt-2">{{ message.content|linebreaksbr }}</div>
-                            <small class="text-muted">
-                                {{ message.created_at|date:"d/m/Y H:i:s" }}
-                            </small>
-
-                            <!-- Imagens geradas -->
-                            {% if message.generated_images.all %}
-                            <div class="mt-3">
-                                {% for img in message.generated_images.all %}
-                                <div class="card mb-2">
-                                    <img src="{{ img.image_url }}" class="card-img-top" alt="Imagem gerada">
-                                    <div class="card-body">
-                                        <p class="card-text small mb-1">
-                                            <strong>Prompt:</strong> {{ img.prompt|truncatewords:20 }}
-                                        </p>
-                                        <a href="{{ img.image_url }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-box-arrow-up-right"></i> Abrir original
-                                        </a>
-                                    </div>
+    <div class="row">
+        <!-- Chat Area -->
+        <div class="col-lg-8">
+            <div class="chat-container">
+                <div class="messages-container" id="messagesContainer">
+                    {% for message in chat_messages %}
+                        <div class="message {{ message.role }}" data-message-id="{{ message.id }}">
+                            <div class="d-flex align-items-start">
+                                <div class="me-2">
+                                    {% if message.role == 'user' %}
+                                        <i class="bi bi-person-circle fs-4 text-primary"></i>
+                                    {% else %}
+                                        <i class="bi bi-robot fs-4 text-secondary"></i>
+                                    {% endif %}
                                 </div>
-                                {% endfor %}
+                                <div class="flex-grow-1">
+                                    <strong>{{ message.role|title }}</strong>
+                                    <div class="mb-1 mt-2">{{ message.content|linebreaksbr }}</div>
+
+                                    <div class="my-2">
+                                        {% with message.generated_images.first as image %}
+                                            {% if image %}
+                                                <a href="{{ image.image_url }}" target="_blank">
+                                                    <img
+                                                            src="{{ image.image_url }}"
+                                                            alt="Generated image"
+                                                            class="img-fluid rounded"
+                                                            style="max-width: 500px; max-height: 600px; object-fit: cover;"
+                                                    >
+                                                </a>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </div>
+
+                                    <small class="text-muted">
+                                        {{ message.created_at|date:"d/m/Y H:i:s" }}
+                                    </small>
+                                </div>
                             </div>
-                            {% endif %}
+                        </div>
+                    {% empty %}
+                        <div class="text-center text-muted py-5">
+                            <i class="bi bi-chat-dots" style="font-size: 3rem;"></i>
+                            <p class="mt-3">Nenhuma mensagem ainda. Comece a conversar!</p>
+                        </div>
+                    {% endfor %}
+
+                    <!-- Loading spinner -->
+                    <div class="message assistant d-none" id="loadingMessage">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <span class="ms-2">Gerando resposta...</span>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <form id="chatForm" class="mt-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="messageInput"
+                               placeholder="Digite sua mensagem..." required>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-send-fill"></i> Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Stats Card -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-bar-chart-fill text-primary"></i> Estatísticas
+                    </h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i class="bi bi-chat"></i>
+                            <strong>{{ chat_messages.count }}</strong> mensagens
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-images"></i>
+                            <strong>{{ generated_images.count }}</strong> imagens geradas
+                        </li>
+                        <li>
+                            <i class="bi bi-clock-history"></i>
+                            Última atualização: {{ conversation.updated_at|date:"d/m/Y H:i" }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Imagens Geradas -->
+            {% if generated_images %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-images text-primary"></i> Últimas Imagens
+                        </h5>
+                        <div class="row g-2">
+                            {% for img in generated_images|slice:":6" %}
+                                <div class="col-6">
+                                    <a href="{{ img.image_url }}" target="_blank">
+                                        <img src="{{ img.image_url }}" class="img-fluid rounded" alt="Imagem gerada">
+                                    </a>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
-                {% empty %}
-                <div class="text-center text-muted py-5">
-                    <i class="bi bi-chat-dots" style="font-size: 3rem;"></i>
-                    <p class="mt-3">Nenhuma mensagem ainda. Comece a conversar!</p>
-                </div>
-                {% endfor %}
-
-                <!-- Loading spinner -->
-                <div class="message assistant d-none" id="loadingMessage">
-                    <div class="spinner-border spinner-border-sm text-primary" role="status">
-                        <span class="visually-hidden">Carregando...</span>
-                    </div>
-                    <span class="ms-2">Gerando resposta...</span>
-                </div>
-            </div>
-
-            <!-- Chat Input -->
-            <form id="chatForm" class="mt-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="messageInput"
-                           placeholder="Digite sua mensagem..." required>
-                    <button class="btn btn-primary" type="submit">
-                        <i class="bi bi-send-fill"></i> Enviar
-                    </button>
-                </div>
-            </form>
+            {% endif %}
         </div>
     </div>
-
-    <!-- Sidebar -->
-    <div class="col-lg-4">
-        <!-- Stats Card -->
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <i class="bi bi-bar-chart-fill text-primary"></i> Estatísticas
-                </h5>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2">
-                        <i class="bi bi-chat"></i>
-                        <strong>{{ chat_messages.count }}</strong> mensagens
-                    </li>
-                    <li class="mb-2">
-                        <i class="bi bi-images"></i>
-                        <strong>{{ generated_images.count }}</strong> imagens geradas
-                    </li>
-                    <li>
-                        <i class="bi bi-clock-history"></i>
-                        Última atualização: {{ conversation.updated_at|date:"d/m/Y H:i" }}
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Imagens Geradas -->
-        {% if generated_images %}
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <i class="bi bi-images text-primary"></i> Últimas Imagens
-                </h5>
-                <div class="row g-2">
-                    {% for img in generated_images|slice:":6" %}
-                    <div class="col-6">
-                        <a href="{{ img.image_url }}" target="_blank">
-                            <img src="{{ img.image_url }}" class="img-fluid rounded" alt="Imagem gerada">
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% endif %}
-    </div>
-</div>
 {% endblock %}
 
 {% block extra_js %}
-<script>
-document.getElementById('chatForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+    <script>
+        document.getElementById('chatForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-    const messageInput = document.getElementById('messageInput');
-    const message = messageInput.value.trim();
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
 
-    if (!message) return;
+            if (!message) return;
 
-    // Mostrar loading
-    document.getElementById('loadingMessage').classList.remove('d-none');
+            // Mostrar loading
+            document.getElementById('loadingMessage').classList.remove('d-none');
 
-    // Limpar input
-    messageInput.value = '';
+            // Limpar input
+            messageInput.value = '';
 
-    // Scroll to bottom
-    const messagesContainer = document.getElementById('messagesContainer');
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            // Scroll to bottom
+            const messagesContainer = document.getElementById('messagesContainer');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    try {
-        const response = await fetch('{% url "agents:chat" conversation.pk %}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: message,
-                model_name: 'gpt-4o',
-                temperature: 0.7
-            })
+            try {
+                const response = await fetch('{% url "agents:chat" conversation.pk %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        model_name: 'gpt-4o',
+                        temperature: 0.7
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Recarregar página para mostrar novas mensagens
+                    location.reload();
+                } else {
+                    alert('Erro: ' + (data.error || 'Erro ao enviar mensagem'));
+                    document.getElementById('loadingMessage').classList.add('d-none');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao conectar com o servidor');
+                document.getElementById('loadingMessage').classList.add('d-none');
+            }
         });
 
-        const data = await response.json();
+        // Auto-scroll to bottom on load
+        window.addEventListener('load', function () {
+            const messagesContainer = document.getElementById('messagesContainer');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-        if (response.ok) {
-            // Recarregar página para mostrar novas mensagens
-            location.reload();
-        } else {
-            alert('Erro: ' + (data.error || 'Erro ao enviar mensagem'));
-            document.getElementById('loadingMessage').classList.add('d-none');
-        }
-    } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro ao conectar com o servidor');
-        document.getElementById('loadingMessage').classList.add('d-none');
-    }
-});
-
-// Auto-scroll to bottom on load
-window.addEventListener('load', function() {
-    const messagesContainer = document.getElementById('messagesContainer');
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-    // Retornar foco para o input após reload
-    const messageInput = document.getElementById('messageInput');
-    messageInput.focus();
-});
-</script>
+            // Retornar foco para o input após reload
+            const messageInput = document.getElementById('messageInput');
+            messageInput.focus();
+        });
+    </script>
 {% endblock %}

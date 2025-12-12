@@ -59,7 +59,6 @@ class Message(models.Model):
 
     response = models.TextField(verbose_name='Resposta da IA', blank=True, null=True)
 
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
