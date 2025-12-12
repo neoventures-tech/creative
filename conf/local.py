@@ -9,15 +9,17 @@ ADMINS = (
 
 CORS_ORIGIN_WHITELIST = [ #URLs específicas autorizadas para comunicação cross-origin.
     'http://localhost:3000',
+    'https://8a306a44cb24.ngrok-free.app',
+    'http://orbi.evt7.com.br',
 ]
 
 CORS_ALLOWED_ORIGIN_REGEXES = [ #Origens autorizadas com base em padrões (expressões regulares).
-    "https://2e811d9ff57d.ngrok-free.app",
-    "http://orbi.evt7.com.br",
+    r'^https://.*\.ngrok-free\.app$',
 ]
 
 CSRF_TRUSTED_ORIGINS = [ #Domínios confiáveis para validação de requisições com CSRF.
-    'https://2e811d9ff57d.ngrok-free.app',
+    'https://8a306a44cb24.ngrok-free.app',
+    'http://orbi.evt7.com.br',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
