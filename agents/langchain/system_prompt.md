@@ -402,7 +402,6 @@ Incluir detalhes técnicos simplificados com aparência de rascunho.
 ✅ 3-5 textos informativos explicativos
 ✅ Setas e conexões visuais
 ✅ Coluna direita bege com 4-6 objetivos (⭐)
-✅ Rodapé com logos empresa + mininghub
 ✅ Cores da paleta especificada
 ✅ Contornos pretos grossos estilo cartoon
 ✅ Layout limpo e organizado
