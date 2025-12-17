@@ -1,0 +1,32 @@
+<div
+     class="d-flex align-items-stretch bg-light rounded p-2 w-100 d-none reply-animate"
+     id="reply-container"
+>
+
+    <div class="me-2 rounded" style="width:4px; background:#9b51e0;"></div>
+
+    <div class="flex-grow-1 overflow-hidden">
+        <div class="fw-semibold small text-capitalize" id="reply-role">
+            John Doe
+        </div>
+        <div class="text-muted small pe-1" id="reply-content">
+            Photo
+        </div>
+    </div>
+
+    <div
+            id="reply-image"
+            style="width: 150px; height: 100px"
+            class="align-content-center me-2"
+    ></div>
+
+    <button
+            style="font-size: 1.5rem; line-height: 1;"
+            type="button"
+            class="btn btn-sm text-muted p-0 ms-2 align-self-start"
+            onclick="setReplyMessage(undefined)"
+            aria-label="Close reply"
+    >
+        &times;
+    </button>
+</div>

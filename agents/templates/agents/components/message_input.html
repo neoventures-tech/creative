@@ -1,0 +1,50 @@
+<form id="chatForm" class="mt-3" enctype="multipart/form-data" data-chat-url="{% url 'agents:chat' conversation.pk %}">
+    <div class="d-flex flex-column gap-1">
+
+        {% include "agents/components/reply_input_container.html" %}
+
+        <div
+                id="attachmentsPreview"
+                class="d-none d-flex flex-wrap gap-2 mb-1 p-2 border rounded bg-light"
+        >
+
+        </div>
+
+        <div class="input-group">
+            <!-- Attachments -->
+            <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="attachBtn"
+                title="Anexar arquivo"
+            >
+                <i class="bi bi-paperclip fs-5"></i>
+            </button>
+
+            <!-- Hidden file input -->
+            <input
+                type="file"
+                id="fileInput"
+                name="attachment"
+                class="d-none"
+                multiple
+            >
+
+            <!-- Message input -->
+            <input
+                type="text"
+                class="form-control"
+                id="messageInput"
+                name="message"
+                placeholder="Digite sua mensagem..."
+                required
+            >
+
+            <!-- Send -->
+            <button class="btn btn-primary" type="submit">
+                <i class="bi bi-send-fill"></i>
+                Enviar
+            </button>
+        </div>
+    </div>
+</form>

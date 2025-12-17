@@ -59,6 +59,16 @@ class Message(models.Model):
 
     response = models.TextField(verbose_name='Resposta da IA', blank=True, null=True)
 
+    reply_to = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="replies",
+        verbose_name="Resposta a",
+        help_text="Mensagem à qual esta mensagem está respondendo"
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

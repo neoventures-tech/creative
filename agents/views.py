@@ -97,34 +97,55 @@ class ConversationDeleteView(LoginRequiredMixin, DeleteView):
 
 @method_decorator([csrf_exempt, login_required], name='dispatch')
 class ChatView(View):
-    """View para enviar mensagens ao agente via AJAX."""
+    """
+    View responsável por enviar mensagens ao agente via AJAX,
+    suportando edição de imagem e múltiplos anexos.
+    """
 
     def post(self, request, pk):
         try:
-            # Buscar apenas conversas do usuário logado
-            conversation = get_object_or_404(Conversation, pk=pk, user=request.user)
+            # 1️⃣ Buscar conversa do usuário logado
+            conversation = get_object_or_404(
+                Conversation,
+                pk=pk,
+                user=request.user
+            )
 
-            # Parse JSON data
-            data = json.loads(request.body)
-            user_message = data.get('message', '')
-            model_name = data.get('model_name', 'gpt-4o')
-            temperature = float(data.get('temperature', 0.7))
+            # 2️⃣ Dados vindos do FormData
+            user_message = request.POST.get("message", "").strip()
+            model_name = request.POST.get("model_name", "gpt-4o")
+            temperature = float(request.POST.get("temperature", 0.7))
+            reply_image_message = request.POST.get("reply_image_message")
 
-            if not user_message:
-                return JsonResponse({'error': 'Mensagem vazia'}, status=400)
+            # 🆕 Anexos
+            attachments = request.FILES.getlist("attachment")
 
-            # Enviar para o agente
+            print("reply_image_message:", reply_image_message)
+            print("attachments:", attachments)
+
+            # Permite: texto OU anexo
+            if not user_message and not attachments:
+                return JsonResponse(
+                    {"error": "Mensagem vazia"},
+                    status=400
+                )
+
             result = chat_with_agent(
                 conversation=conversation,
                 user_message=user_message,
                 model_name=model_name,
-                temperature=temperature
+                temperature=temperature,
+                reply_image_message=reply_image_message,
+                attachments=attachments,
             )
 
             return JsonResponse(result)
 
         except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+            return JsonResponse(
+                {"error": str(e)},
+                status=500
+            )
 
 
 class GeneratedImageListView(LoginRequiredMixin, ListView):

@@ -1,0 +1,36 @@
+{% if message.reply_to %}
+    <div
+            class="d-flex align-items-stretch bg-light rounded p-2 w-90 reply-animate"
+    >
+        <div class="me-2 rounded" style="width:4px; background:#9b51e0;"></div>
+
+        <div class="flex-grow-1 overflow-hidden">
+            <div class="fw-semibold small text-capitalize">
+                {{ message.reply_to.role }}
+            </div>
+
+            <div class="text-muted small pe-1">
+                {{ message.reply_to.content|truncatechars:255 }}
+            </div>
+        </div>
+
+        {% with message.reply_to.generated_images.first as image %}
+            {% if image %}
+                <a
+                        href="{{ image.image_url }}"
+                        target="_blank"
+                        class="ms-2"
+                        style="width:250px; height:100px;"
+                >
+                    <img
+                            src="{{ image.image_url }}"
+                            alt="Reply image"
+                            class="img-fluid rounded h-100 w-100"
+                            style="object-fit: cover;"
+                    >
+                </a>
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endif %}
+

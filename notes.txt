@@ -1,6 +1,6 @@
 [ ] 1 - Adicionar mais contexto a landingpage pra o usuário entender melhor o que a ferramenta faz.
 [ ] 2 - Adicionar contexto sobre como responder o formulário
 [x] 3 - A cada resposta o retorno da ia deve ser o contexto do que ela entendeu da da reposta atual. Ex: entendi que …. e vamos seguir pra próxima pergunta.
-[ ] 4 - Remover as logos das imagens.
+[x] 4 - Remover as logos das imagens.
 [x] 5 - Repassar a ultima imagem que foi gerada pra poder alterar se for necessário
-[ ] 6 - A primeira interação a ia retornar o texto… Pegar com Guilherme
+[~] 6 - A primeira interação a ia retornar o texto… Pegar com Guilherme

@@ -1,0 +1,57 @@
+<div class="message {{ message.role }}" data-message-id="{{ message.id }}">
+    <div class="d-flex align-items-start justify-center w-100">
+
+        <div class="flex-grow-1 w-100">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <div class="me-2">
+                        {% if message.role == 'user' %}
+                            <i class="bi bi-person-circle fs-4 text-primary"></i>
+                        {% else %}
+                            <i class="bi bi-robot fs-4 text-secondary"></i>
+                        {% endif %}
+                    </div>
+                    <strong>{{ message.role|title }}</strong>
+                </div>
+                {% with message.generated_images.first as image %}
+                    {% if message.role == "assistant" and image %}
+                        <button
+                                type="button"
+                                class="btn p-0 border-0 bg-transparent text-muted"
+                                onclick="setReplyMessage(this)"
+                                data-id="{{ message.id }}"
+                                data-role="{{ message.role }}"
+                                data-content="{{ message.content|escapejs }}"
+                                data-image-url="{{ message.generated_images.last.image_url|default:'' }}"
+                                title="Reply"
+                        >
+                            <i class="bi bi-reply" style="font-size: 1.4rem;"></i>
+                        </button>
+                    {% endif %}
+                {% endwith %}
+
+            </div>
+
+            {% include "agents/components/reply_output_container.html" %}
+
+            <div class="mb-1 mt-2">{{ message.content|linebreaksbr }}</div>
+            <div class="my-2">
+                {% with message.generated_images.first as image %}
+                    {% if image %}
+                        <a href="{{ image.image_url }}" target="_blank">
+                            <img
+                                    src="{{ image.image_url }}"
+                                    alt="Generated image"
+                                    class="img-fluid rounded"
+                                    style="max-width: 500px; max-height: 600px; object-fit: cover;"
+                            >
+                        </a>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <small class="text-muted">
+                {{ message.created_at|date:"d/m/Y H:i:s" }}
+            </small>
+        </div>
+    </div>
+</div>

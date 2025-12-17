@@ -140,7 +140,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = '/static/'
 
 # Django automatically collects static files from each app's static/ directory
 # No need for STATICFILES_DIRS since we're only using app-level static directories
