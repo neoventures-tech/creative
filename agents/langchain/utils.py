@@ -73,3 +73,15 @@ def md_to_token_friendly(md_text: str) -> str:
     text = re.sub(r"[ \t]{2,}", " ", text)
 
     return text.strip()
+
+
+def _get_attachment_type(file):
+    content_type = getattr(file, "content_type", "")
+
+    if content_type.startswith("image/"):
+        return "image"
+    if content_type.startswith("audio/"):
+        return "audio"
+    if content_type.startswith("video/"):
+        return "video"
+    return "file"

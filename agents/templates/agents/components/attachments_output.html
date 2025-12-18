@@ -1,0 +1,47 @@
+{% if message.attachments.exists %}
+    <div class="mt-1 d-flex flex-column gap-2">
+        {% for attachment in message.attachments.all %}
+
+            {% if attachment.attachment_type == "image" %}
+                <a href="{{ attachment.file.url }}" target="_blank">
+                    <img
+                            src="{{ attachment.file.url }}"
+                            alt="{{ attachment.name }}"
+                            class="img-fluid rounded"
+                            style="max-width: 50px; max-height: 60px; object-fit: cover;"
+                    >
+                </a>
+
+            {% elif attachment.attachment_type == "audio" %}
+                <audio controls class="w-100">
+                    <source src="{{ attachment.file.url }}" type="{{ attachment.mime_type }}">
+                    Your browser does not support audio.
+                </audio>
+
+            {% elif attachment.attachment_type == "video" %}
+                <video controls class="w-100 rounded" style="max-height: 400px;">
+                    <source src="{{ attachment.file.url }}" type="{{ attachment.mime_type }}">
+                    Your browser does not support video.
+                </video>
+
+            {% else %}
+                <a
+                        href="{{ attachment.file.url }}"
+                        target="_blank"
+                        class="d-flex align-items-center gap-2 text-decoration-none border rounded p-2"
+                >
+                    <i class="bi bi-paperclip fs-4"></i>
+                    <div class="d-flex flex-column">
+                        <strong class="text-truncate" style="max-width: 300px;">
+                            {{ attachment.name|default:attachment.file.name }}
+                        </strong>
+                        <small class="text-muted">
+                            {{ attachment.mime_type }}
+                        </small>
+                    </div>
+                </a>
+            {% endif %}
+
+        {% endfor %}
+    </div>
+{% endif %}

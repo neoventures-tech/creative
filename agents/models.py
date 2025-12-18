@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 # Create your models here.
 
 class Conversation(models.Model):
@@ -144,6 +145,65 @@ class GeneratedImage(models.Model):
 
     def __str__(self):
         return f"Imagem {self.id} - {self.prompt[:50]}..."
+
+
+class Attachment(models.Model):
+    """
+    Armazena anexos vinculados a uma mensagem.
+    """
+
+    ATTACHMENT_TYPE_CHOICES = [
+        ('image', 'Imagem'),
+        ('file', 'Arquivo'),
+        ('audio', 'Áudio'),
+        ('video', 'Vídeo'),
+    ]
+
+    message = models.ForeignKey(
+        'Message',
+        on_delete=models.CASCADE,
+        related_name='attachments',
+        verbose_name='Mensagem'
+    )
+
+    file = models.FileField(
+        upload_to='attachments/%Y/%m/%d/',
+        verbose_name='Arquivo'
+    )
+
+    attachment_type = models.CharField(
+        max_length=10,
+        choices=ATTACHMENT_TYPE_CHOICES,
+        verbose_name='Tipo'
+    )
+
+    name = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name='Nome do arquivo'
+    )
+
+    mime_type = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name='MIME type'
+    )
+
+    size = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name='Tamanho (bytes)'
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Anexo'
+        verbose_name_plural = 'Anexos'
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f"Attachment ({self.attachment_type}) - {self.name or self.file.name}"
 
 
 class LLMUsage(models.Model):
@@ -300,10 +360,9 @@ class LLMUsage(models.Model):
         """Calcula totais antes de salvar"""
         self.total_tokens = self.input_tokens + self.output_tokens
         self.total_cost = (
-            self.input_cost +
-            self.output_cost +
-            self.cache_creation_cost +
-            self.cache_read_cost
+                self.input_cost +
+                self.output_cost +
+                self.cache_creation_cost +
+                self.cache_read_cost
         )
         super().save(*args, **kwargs)
-

@@ -1,17 +1,17 @@
 import os
-import pathlib
 import time
 from dataclasses import dataclass
 from typing import Any, TypedDict, Optional, List
 
+from django.db import transaction
 from langchain.agents import create_agent
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_openai import ChatOpenAI
 
 from agents.langchain.tools import get_agent_tools
-from agents.langchain.utils import md_to_token_friendly
-from agents.models import Message, LLMUsage, GeneratedImage
+from agents.langchain.utils import md_to_token_friendly, _get_attachment_type
+from agents.models import Message, LLMUsage, GeneratedImage, Attachment as AttachmentModel
 
 
 # =========================================================
@@ -191,18 +191,45 @@ def build_chat_history(conversation):
         raise
 
 
-def save_user_message(conversation, user_message, reply_image_message=None):
+def save_user_message(
+        conversation,
+        user_message,
+        reply_image_message=None,
+        attachments=None
+):
+    """
+    Salva mensagem do usuário com anexos.
+    """
+
     try:
-        Message.objects.create(
-            conversation=conversation,
-            role="user",
-            content=user_message,
-            reply_to_id=reply_image_message
-        )
-    except Exception:
+        with transaction.atomic():
+
+            message = Message.objects.create(
+                conversation=conversation,
+                role="user",
+                content=user_message,
+                reply_to_id=reply_image_message
+            )
+
+            if attachments:
+                for file in attachments:
+                    AttachmentModel.objects.create(
+                        message=message,
+                        file=file,
+                        attachment_type=_get_attachment_type(file),
+                        name=file.name,
+                        mime_type=getattr(file, "content_type", ""),
+                        size=getattr(file, "size", None),
+                    )
+
+            return message
+
+    except Exception as e:
         import traceback
         traceback.print_exc()
-        raise
+        raise RuntimeError(
+            "Erro ao salvar mensagem do usuário com anexos."
+        ) from e
 
 
 # =========================================================

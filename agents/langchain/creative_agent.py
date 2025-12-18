@@ -47,7 +47,7 @@ def chat_with_agent(
         # [3/7] Save user message
         # --------------------------------------------------------------
         logger.step(3, "Salvando mensagem do usuário...", "💾")
-        save_user_message(conversation, user_message, reply_image_message)
+        save_user_message(conversation, user_message, reply_image_message, attachments)
         logger.step_success("Mensagem do usuário salva")
 
         # --------------------------------------------------------------
