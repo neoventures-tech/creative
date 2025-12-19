@@ -1,8 +1,23 @@
 # Descrição Visual Detalhada da Imagem a Ser Gerada
 
-Este arquivo define, de forma obrigatória e não interpretativa, como a imagem deve ser gerada.
+Este arquivo define, de forma obrigatória e não interpretativa, como a imagem deve ser gerada para ser **altamente explicativa, coesa e rica em detalhes**, sem causar confusão visual.
 Todas as regras aqui descritas devem ser aplicadas simultaneamente.
 Nenhum elemento pode ser omitido, reposicionado ou reinterpretado.
+
+---
+
+## PRINCÍPIO GERAL DE QUALIDADE VISUAL
+
+A imagem deve:
+- Explicar claramente um problema real
+- Ser compreendida em poucos segundos
+- Conter muitos detalhes relevantes
+- Nunca parecer poluída, confusa ou excessiva
+
+Regra central:
+**Riqueza visual ≠ excesso visual**.
+
+Cada elemento deve existir para explicar algo.
 
 ---
 
@@ -10,314 +25,213 @@ Nenhum elemento pode ser omitido, reposicionado ou reinterpretado.
 
 ### Contorno e Traço
 
-- Todos os elementos devem possuir contornos pretos com linhas orgânicas, levemente irregulares e texturizadas.
-- O traço deve simular desenho manual feito com lápis, caneta nanquim ou giz.
-- Variações sutis de espessura e opacidade devem estar presentes, sugerindo pressão manual.
-- Nenhuma linha deve ser perfeitamente reta ou uniforme.
-- Todos os objetos, personagens, textos, ícones e símbolos devem manter esse padrão.
+- Contornos pretos orgânicos, irregulares e texturizados
+- Aparência de desenho manual (lápis, nanquim ou giz)
+- Variação sutil de espessura e opacidade
+- Nenhuma linha perfeitamente reta
+- Aplicar o mesmo padrão a todos os elementos
 
 ### Aplicação de Cor
 
-- Cores aplicadas de forma suave, com pequenas imperfeições.
-- Transparências leves que deixam visíveis os traços de base.
-- Pintura com aparência de giz de cera ou lápis de cor.
-- Nenhum preenchimento sólido digital perfeito.
+- Cores suaves com imperfeições visíveis
+- Leve transparência mostrando o traço base
+- Aparência de giz de cera ou lápis de cor
+- Proibido preenchimento digital perfeito
 
 ### Iluminação e Profundidade
 
-- Não utilizar sombras.
-- Não aplicar efeitos de luz realista.
-- A profundidade deve ser sugerida apenas por sobreposição e escala.
-- Visual propositalmente plano.
+- Sem sombras realistas
+- Sem efeitos de luz
+- Profundidade apenas por sobreposição e escala
+- Visual propositalmente plano
 
 ### Paleta de Cores
 
-- Paleta limitada a no máximo 4 ou 5 cores principais por imagem.
-- Uso obrigatório do laranja #FF6B35 para alertas, pontos de atenção ou elementos-chave.
-- Todas as cores devem pertencer à paleta definida no final deste documento.
+- Máximo de 4 ou 5 cores principais
+- Uso obrigatório do laranja #FF6B35 para alertas
+- Usar apenas a paleta oficial
 
 ### Fundo
 
-- Fundo sólido e claro.
-- Branco puro (#FFFFFF) ou cinza muito claro (#F5F5F5).
-- Sem texturas, sem gradientes, sem padrões.
+- Fundo sólido e claro
+- Branco (#FFFFFF) ou cinza claro (#F5F5F5)
+- Sem texturas, gradientes ou padrões
 
 ### Perspectiva
 
-- Vista frontal plana ou levemente isométrica.
-- Ângulo máximo de 30 graus.
-- Nunca utilizar perspectiva profunda ou realista.
+- Frontal ou levemente isométrica
+- Ângulo máximo de 30°
+- Nunca realista ou profunda
 
 ### Tipografia
 
-- Fonte sans-serif.
-- Grossa, legível e simples.
-- Todas as letras com contorno preto.
-- Textos sempre em CAIXA ALTA.
+- Sans-serif
+- Grossa, simples e legível
+- Contorno preto
+- Sempre em CAIXA ALTA
 
 ### Composição
 
-- Layout limpo, organizado e modular.
-- Espaçamento consistente entre elementos.
-- Nenhum elemento sobreposto de forma confusa.
-
-### Ícones e Símbolos
-
-- Estilo pictográfico simples.
-- Contorno preto.
-- Preenchimento de cor sólida texturizada.
-- Fácil compreensão visual.
+- Modular, limpa e organizada
+- Espaçamento consistente
+- Nenhuma sobreposição confusa
 
 ---
 
-## 2. Especificação Obrigatória do Layout Base
+## 2. Layout Base (Estrutura Imutável)
 
-### Regra Estrutural
-
-- Utilizar a imagem de referência geométrica como base estrutural estrita.
-- O layout, geometria, proporções e paleta devem ser exatamente iguais à referência.
-- Não alterar posição, tamanho ou formato das barras superiores.
-- Não alterar o bloco lateral direito.
-
-### Estrutura Geral
-
-- Fundo branco limpo.
-- Barra superior horizontal grossa em azul escuro.
-- Corte diagonal na extremidade direita da barra superior.
-- Linha fina azul ciano abaixo da barra.
-- Bloco vertical flutuante à direita em bege pálido.
+- Usar referência geométrica como base estrita
+- Não alterar proporções, posições ou blocos
+- Fundo branco
+- Barra superior azul escuro com corte diagonal
+- Linha ciano abaixo do cabeçalho
+- Bloco vertical direito em bege claro
 
 ---
 
-## 3. Cabeçalho Superior (Template Visual)
+## 3. Cabeçalho Superior
 
-### Dimensões
-
-- Ocupa entre 12% e 15% da altura total da imagem.
-- Largura total (100%).
-
-### Cor
-
-- Azul escuro profissional.
-- Exemplos permitidos:
-    - #1a3a52
-    - #2c5f7d
-    - #003d5c
-
-### Texto
-
-- Cor branca (#FFFFFF).
-- Centralizado horizontalmente.
-- Fonte sans-serif bold.
-- Sempre em CAIXA ALTA.
-- Estrutura obrigatória em duas linhas:
-    - Linha 1: COMO PODEMOS [AÇÃO PRINCIPAL],
-    - Linha 2: [DETALHES DO OBJETIVO]?
+- 12% a 15% da altura total
+- Azul escuro profissional
+- Texto branco, centralizado, bold
+- Duas linhas obrigatórias:
+  - COMO PODEMOS [AÇÃO PRINCIPAL]
+  - [OBJETIVO]?
 
 ---
 
-## 4. Área Esquerda / Central – Contexto do Problema
+## 4. Área Central – Contexto do Problema
 
-### Dimensões
-
-- 75% da largura total.
-- 70% a 75% da altura total (abaixo do cabeçalho).
-
-### Estilo
-
-- Aplicar integralmente o estilo visual descrito na seção 1.
-- Perspectiva frontal ou levemente isométrica.
+- 75% da largura total
+- 70% a 75% da altura
+- Aplicar todo o estilo visual definido
+- Cena clara, legível e narrativa
 
 ---
 
 ## 5. Equipamentos e Elementos-Chave
 
-### Quantidade Obrigatória
+### Quantidade
 
-- Mínimo: 2 elementos
-- Máximo: 4 elementos
+- Mínimo: 2
+- Máximo: 4
 
-### Regras de Detalhamento
+### Regras de Clareza
 
-- Cada equipamento deve conter:
-    - Forma claramente identificável
-    - Label em CAIXA ALTA
-    - Pelo menos 1 detalhe técnico visual (parafuso, painel, conexão, linha, engrenagem, cabo, indicador)
-- O nível de detalhe deve ser suficiente para explicar o problema, mas nunca excessivo.
+Cada equipamento deve:
+- Ter forma facilmente reconhecível
+- Ter label em CAIXA ALTA
+- Conter 1 ou 2 detalhes técnicos visuais
+
+Detalhes devem explicar o problema, não decorar.
 
 ### Estilo
 
-- Ilustrações desenhadas à mão.
-- Traços orgânicos e texturizados.
-- Caixas brancas (#FFFFFF) com borda cinza clara (#CCCCCC), irregulares.
-- Contornos pretos com variação de espessura.
-- Cores vibrantes:
-    - Amarelo #FFD700
-    - Laranja #FF9933
-    - Cinza #808080
-
-### Distribuição
-
-- Distribuir pelo layout evitando vazio central.
-- Nunca concentrar todos os equipamentos em um único ponto.
+- Desenho manual
+- Contornos irregulares
+- Cores vibrantes controladas
+- Distribuição equilibrada no layout
 
 ---
 
 ## 6. Personagens
 
-### Quantidade Obrigatória
+### Quantidade
 
-- Mínimo: 2 personagens
-- Máximo: 4 personagens
+- Mínimo: 2
+- Máximo: 4
 
-### Regra de Riqueza Visual Controlada
+### Regra de Função
 
-- Cada personagem deve contribuir para a compreensão do problema.
-- Nenhum personagem pode ser decorativo.
-- Não adicionar personagens apenas para “preencher espaço”.
+Todo personagem deve:
+- Executar uma ação relevante
+- Contribuir para entender o problema
 
-### Estilo
+Nenhum personagem decorativo.
 
-- Cartoon semi-profissional com acabamento de desenho manual.
-- Proporções humanas realistas.
-- Contornos pretos irregulares.
-- Textura visível de lápis ou giz.
-- Tons de pele variados.
+### Estilo e Realismo
 
-### Vestimentas
-
-- Variar conforme o contexto (mineração, indústria, saúde, escritório, construção).
-- EPIs obrigatórios quando aplicável.
-
-### Expressões
-
-- Emoções relacionadas ao problema:
-    - preocupação
-    - esforço
-    - frustração
-    - cansaço
-- Nunca exageradas ou caricatas.
-
-### Ações
-
-- Personagens sempre em ação:
-    - operando
-    - analisando
-    - empurrando
-    - observando falhas
-    - interagindo com equipamentos ou dados
-
-### Realismo
-
-- Movimentos naturais.
-- Mãos e corpos proporcionais.
-- Sem distorções, membros extras ou poses irreais.
+- Cartoon semi-profissional
+- Proporções humanas realistas
+- Expressões contidas (preocupação, esforço, análise)
+- Movimentos naturais
 
 ---
 
-## 7. Problemas Visuais (Elemento Central)
+## 7. Problema Visual Central
 
-- Destaque em vermelho ou amarelo.
-- Contornos irregulares desenhados à mão.
-- Ícone ⚠️ em estilo rascunhado.
-- Triângulo vermelho (#E74C3C ou #FF0000).
-- Nome do problema em vermelho, CAIXA ALTA.
-- Efeitos desenhados à mão:
-    - poeira
-    - vibração
-    - sujeira
-    - linhas de movimento
-    - relógios ou ampulhetas
-- Setas vermelhas feitas “à caneta”.
-- Círculos amarelos com bordas tremidas.
+- Destaque em vermelho ou amarelo
+- Ícone ⚠️ desenhado à mão
+- Nome do problema em CAIXA ALTA
+- Setas, círculos e linhas de movimento
+- Efeitos visuais simples (poeira, vibração, atraso)
+
+O problema deve ser identificado em menos de 3 segundos.
 
 ---
 
-## 8. Textos e Labels Informativos
+## 8. Textos e Labels Explicativos
 
-### Quantidade Controlada
+### Quantidade
 
-- Mínimo: 3 textos
-- Máximo: 5 textos
+- Mínimo: 3
+- Máximo: 5
 
 ### Regras
 
-- Cada texto deve explicar algo relevante.
-- Nenhum texto redundante.
-- Caixas brancas com borda fina.
-- Setas conectando texto ao elemento correspondente.
-- Fonte sans-serif legível.
+- Cada texto explica uma causa, efeito ou condição
+- Proibido texto redundante
+- Conectado visualmente ao elemento
 
 ---
 
-## 9. Área de Medições e Dados (Inferior)
+## 9. Área Inferior – Dados e Medições
 
-- Caixa branca ou cinza muito claro.
-- Ícones simples desenhados à mão.
-- Conteúdos possíveis:
-    - normas
-    - procedimentos
-    - gráficos simples
-- Ícone ⚠️ quando houver alerta técnico.
+- Caixa clara
+- Ícones simples
+- Gráficos ou indicadores básicos
+- Usar ⚠️ apenas quando houver alerta real
 
 ---
 
 ## 10. Coluna Direita – Objetivos
 
-### Dimensões
+- 25% da largura
+- Fundo bege claro
+- Ícone de alvo no topo
+- 4 a 6 objetivos
+- Cada item iniciado por ⭐
 
-- 25% da largura.
-- 70% a 75% da altura.
-
-### Conteúdo
-
-- Ícone de alvo no topo.
-- Lista vertical com 4 a 6 objetivos.
-- Cada item iniciado por ⭐.
-- Texto preto, legível.
-- Espaçamento generoso entre itens.
+Objetivos devem ser claros, curtos e acionáveis.
 
 ---
 
-## 11. Regra de Densidade Visual (ANTI-POLUIÇÃO)
+## 11. Regra Suprema de Densidade Visual
 
-A imagem DEVE ser rica em informações, porém:
+A imagem deve ser:
+- Rica em informação
+- Altamente explicativa
+- Visualmente limpa
 
-- Nunca excessivamente carregada
-- Nunca confusa
-- Nunca com elementos redundantes
-
-Regra prática:
-Cada elemento deve justificar sua presença explicando o problema.
-
-Se um elemento não contribui diretamente para a narrativa do problema, ele NÃO deve ser incluído.
+Regra final:
+**Se remover um elemento não altera a compreensão do problema, ele não deve existir.**
 
 ---
 
 ## 12. Paleta de Cores Oficial
 
-- Azul escuro: #1a3a52, #2c5f7d, #003d5c
-- Azul claro: #5a7a9e, #6fa8dc
-- Amarelo: #ffd700, #ffcc00, #ff9933
-- Vermelho: #e74c3c, #ff0000, #d62828
-- Laranja: #ff6b35, #f77f00
-- Bege: #fef9e7, #fff8dc, #fffacd
-- Cinza: #808080, #a0a0a0, #cccccc
-- Branco: #ffffff
-- Preto: #000000
-- Fundo geral: #f5f5f5, #fafafa
+(Manter exatamente conforme definido no padrão global)
 
 ---
 
-## 13. Elementos Obrigatórios em Todas as Imagens
+## 13. Elementos Obrigatórios
 
-- Cabeçalho azul com pergunta
-- 2 a 4 equipamentos com labels
-- 2 a 4 personagens em ação
+- Cabeçalho com pergunta
+- 2–4 equipamentos
+- 2–4 personagens ativos
 - Problema central com ⚠️
-- 3 a 5 textos explicativos
-- Setas e conexões visuais
-- Coluna de objetivos com ⭐
-- Paleta oficial aplicada
+- 3–5 textos explicativos
+- Setas e conexões
+- Coluna de objetivos
 - Contornos manuais
-- Layout limpo, organizado e equilibrado
+- Layout coeso, claro e equilibrado
