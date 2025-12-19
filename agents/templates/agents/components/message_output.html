@@ -29,7 +29,8 @@
                                 data-has-attachments="{{ message.attachments.exists|yesno:'1,0' }}"
                                 title="Reply"
                         >
-                            <i class="bi bi-reply" style="font-size: 1.4rem;"></i>
+                            <i class="bi bi-pencil-square"></i>
+                            Editar imagem
                         </button>
                     {% endif %}
                 {% endwith %}
@@ -37,7 +38,6 @@
 
             <!-- Reply preview -->
             {% include "agents/components/reply_output_container.html" %}
-
 
             <!-- Message content -->
             {% if message.content %}
