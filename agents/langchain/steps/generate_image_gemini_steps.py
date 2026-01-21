@@ -186,8 +186,7 @@ def step_save_image(
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"gemini_{timestamp}_{conversation.id}.png"
-    # output_path = output_dir / filename
-    output_path = filename
+    output_path = output_dir / filename
 
     with open(output_path, "wb") as f:
         f.write(image_bytes)
@@ -197,7 +196,7 @@ def step_save_image(
     record = GeneratedImage.objects.create(
         conversation=conversation,
         prompt=prompt,
-        image_url=image_url,
+        image_url=filename,
         model="gemini-3-pro-image-preview",
         size=aspect_ratio,
         quality="high",
