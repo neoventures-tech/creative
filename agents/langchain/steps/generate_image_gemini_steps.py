@@ -186,7 +186,8 @@ def step_save_image(
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"gemini_{timestamp}_{conversation.id}.png"
-    output_path = output_dir / filename
+    # output_path = output_dir / filename
+    output_path = filename
 
     with open(output_path, "wb") as f:
         f.write(image_bytes)
