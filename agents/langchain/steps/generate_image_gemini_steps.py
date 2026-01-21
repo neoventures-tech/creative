@@ -179,9 +179,10 @@ def step_save_image(
 ) -> str:
     from pathlib import Path
     from datetime import datetime
+    from django.conf import settings
     from agents.models import GeneratedImage
 
-    output_dir = Path("media/generated_images")
+    output_dir = Path(settings.MEDIA_ROOT) / "generated_images"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -191,12 +192,12 @@ def step_save_image(
     with open(output_path, "wb") as f:
         f.write(image_bytes)
 
-    image_url = f"/{output_path}"
+    image_url = f"{settings.MEDIA_URL}generated_images/{filename}"
 
     record = GeneratedImage.objects.create(
         conversation=conversation,
         prompt=prompt,
-        image_url=filename,
+        image_url=image_url,
         model="gemini-3-pro-image-preview",
         size=aspect_ratio,
         quality="high",
@@ -204,10 +205,6 @@ def step_save_image(
 
     print("✓ Imagem salva com sucesso")
     print(f"   - Arquivo: {output_path}")
-    print(f"   - DB ID: {record.id}")
-
-    print("\n" + "=" * 80)
-    print("✅ IMAGEM GERADA COM SUCESSO VIA GEMINI")
-    print("=" * 80 + "\n")
+    print(f"   - URL: {image_url}")
 
     return f"✅ Imagem gerada com sucesso!\nURL: {image_url}"
